@@ -15,8 +15,19 @@ const readJsonFile = (fileName, callback) => {
         HINT: Read up on JSON parsing Node.js
        */
       // Check for errors
-      
+      if (err) {
+        console.error(err);
+        return;
+      }
+
       // Save the parsed data in the footballClub variable that is been passed in
+      let footballClub;
+      try {
+        footballClub = JSON.parse(data);
+      } catch(err) {
+        console.error(err);
+      }
+
       // the callback function
   
       /**
@@ -28,6 +39,9 @@ const readJsonFile = (fileName, callback) => {
        * Read more about callbacks here https://www.freecodecamp.org/news/javascript-callback-functions-what-are-callbacks-in-js-and-how-to-use-them/
        * If you still do not understand what a callback is, google is your best friend :)
        */ 
+      
+      console.log(data);
+
       callback(footballClub);
 
   

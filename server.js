@@ -43,25 +43,31 @@ const requestHandler = (request, response) => {
       return response.end();
     //complete this part  
     case "/footballClub":
-      return null;
+      response.end(JSON.stringify(footballClub, null, 2));
       //complete this part as well
     default:
-      return null;
+      response.writeHead(404);
+      console.log("Bad Gateway!");
+      // set response content
+      response.end('Bad gateway error')
   }
 };
 
 const connectServer = (_footballClub_) => {
-  footballClub = _footballClub_
-  // Create the server
-
-  // Start the server
-
   /**
    * How to?
    * Read https://www.w3schools.com/nodejs/met_http_createserver.asp
    * then read https://www.w3schools.com/nodejs/func_http_requestlistener.asp to understand how request and response is passed into requestHandler()
    *
    */
+  footballClub = _footballClub_
+  // Create the server
+  const server = http.createServer(requestHandler);
+  // Start the server
+  server.listen(port, () => {
+    //once the server is listening, this callback function is executed
+    console.log(`Server listening on: http://127.0.0.1:${port}`);
+  });
 };
 
 
